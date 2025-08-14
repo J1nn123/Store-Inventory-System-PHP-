@@ -12,7 +12,7 @@ $totalStocks = $conn->query("SELECT SUM(quantity) as total FROM products")->fetc
 $totalSalesMoney = $conn->query("SELECT SUM(total_amount) as total FROM sales")->fetch_assoc()['total'] ?? 0;
 
 // Fetch real monthly sales data
-$monthlySales = array_fill(1, 12, 0); // Fill from Jan to Dec with 0
+$monthlySales = array_fill(1, 12, 0); 
 
 $query = $conn->query("
     SELECT MONTH(created_at) as month, SUM(total_amount) as total 
@@ -29,7 +29,7 @@ $monthlyLabels = json_encode(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','S
 ?>
 
 <div class="flex-1 p-10 bg-gray-100 min-h-screen">
-  <h1 class="text-3xl font-semibold text-gray-800 mb-6">Dashboard</h1>
+  <h1 class="text-3xl font-semibold text-gray-800 mb-6">dashboard</h1>
 
   <!-- Summary Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-10">
