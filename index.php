@@ -53,7 +53,7 @@ $monthlyLabels = json_encode(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','S
 
   <!-- Chart Section -->
   <div class="bg-white p-6 rounded-xl shadow">
-    <h3 class="text-xl font-semibold text-gray-700 mb-4">Monthly Sales Overviews</h3>
+    <h3 class="text-xl font-semibold text-gray-700 mb-4">Monthly Sales Overview</h3>
     <canvas id="salesChart" height="100"></canvas>
   </div>
 </div>
