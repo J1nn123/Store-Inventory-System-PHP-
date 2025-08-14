@@ -1,18 +1,26 @@
-<?php include 'includes/db.php'; ?>
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/sidebar.php'; ?>
-
 <?php
+include 'includes/db.php';
+include 'includes/header.php';
+include 'includes/sidebar.php';
+
 // Fetch values from database
 $totalProducts = $conn->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
 $totalSales = $conn->query("SELECT COUNT(*) as count FROM sales")->fetch_assoc()['count'];
-$totalStocks = $conn->query("SELECT SUM(quantity) as total FROM products")->fetch_assoc()['total'] ?? 0;
+
+// Always sum the live quantity from products table
+$totalStocks = $conn->query("
+    SELECT COALESCE(SUM(quantity), 0) as total 
+    FROM products
+")->fetch_assoc()['total'];
 
 // Get total money from sales
-$totalSalesMoney = $conn->query("SELECT SUM(total_amount) as total FROM sales")->fetch_assoc()['total'] ?? 0;
+$totalSalesMoney = $conn->query("
+    SELECT COALESCE(SUM(total_amount), 0) as total 
+    FROM sales
+")->fetch_assoc()['total'];
 
 // Fetch real monthly sales data
-$monthlySales = array_fill(1, 12, 0); 
+$monthlySales = array_fill(1, 12, 0);
 
 $query = $conn->query("
     SELECT MONTH(created_at) as month, SUM(total_amount) as total 
@@ -29,7 +37,7 @@ $monthlyLabels = json_encode(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','S
 ?>
 
 <div class="flex-1 p-10 bg-gray-100 min-h-screen">
-  <h1 class="text-3xl font-semibold text-gray-800 mb-6">dashboard</h1>
+  <h1 class="text-3xl font-semibold text-gray-800 mb-6">Dashboard</h1>
 
   <!-- Summary Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-10">

@@ -4,7 +4,7 @@
 $success = false;
 
 // Fetch products
-$product_result = $conn->query("SELECT product_id, name, price FROM products");
+$product_result = $conn->query("SELECT product_id, product_name, price FROM products");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total_amount = $_POST['total_amount'];
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sale_id = $stmt->insert_id;
 
         $item_stmt = $conn->prepare("INSERT INTO sales_items (sale_id, product_id, quantity) VALUES (?, ?, ?)");
-        $custom_stmt = $conn->prepare("INSERT INTO products (name, price) VALUES (?, ?)");
+        $custom_stmt = $conn->prepare("INSERT INTO products (product_name, price) VALUES (?, ?)");
 
         for ($i = 0; $i < count($quantities); $i++) {
             $product_id = $product_ids[$i];
@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,13 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-gray-100 text-gray-800 flex">
 
-    <!-- ✅ Include the sidebar (already styled) -->
     <?php include 'includes/sidebar.php'; ?>
 
-    <!-- ✅ Main Content next to sidebar -->
-    <div class="flex-1 p-8 ">
-       
-
+    <div class="flex-1 p-8">
         <div class="max-w-3xl mx-auto bg-white p-8 rounded shadow-md">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-blue-600">Add New Sale</h2>
@@ -130,10 +125,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     class="w-full px-4 py-2 border rounded">
                                     <option value="">Select product</option>
                                     <?php
-                                    $product_result->data_seek(0); // reset pointer
+                                    $product_result->data_seek(0);
                                     while ($product = $product_result->fetch_assoc()): ?>
                                         <option value="<?= $product['product_id'] ?>" data-price="<?= $product['price'] ?>">
-                                            <?= htmlspecialchars($product['name']) ?> (₱<?= $product['price'] ?>)
+                                            <?= htmlspecialchars($product['product_name']) ?> (₱<?= $product['price'] ?>)
                                         </option>
                                     <?php endwhile; ?>
                                     <option value="custom">-- Custom Product --</option>
@@ -146,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
-                        <!-- Custom product fields -->
                         <div class="custom-fields hidden mb-4">
                             <div class="flex gap-4">
                                 <div class="w-2/5">
@@ -163,8 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <button type="button" onclick="addProductRow()"
-                    class="text-blue-600 font-semibold hover:underline">+ Add Another Product</button>
+             
 
                 <div class="mt-6">
                     <label class="block mb-1 font-semibold">Total Amount (₱)</label>

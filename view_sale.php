@@ -43,7 +43,7 @@
 
                         // Fetch related products
                         $items_result = $conn->query("
-                            SELECT p.name, si.quantity
+                            SELECT p.product_name, si.quantity
                             FROM sales_items si
                             JOIN products p ON si.product_id = p.product_id
                             WHERE si.sale_id = $sale_id
@@ -51,7 +51,7 @@
                         
                         $product_list = "";
                         while ($item = $items_result->fetch_assoc()) {
-                            $product_list .= "{$item['name']} (x{$item['quantity']}), ";
+                            $product_list .= "{$item['product_name']} (x{$item['quantity']}), ";
                         }
                         $product_list = rtrim($product_list, ', ');
                     ?>

@@ -8,20 +8,24 @@ include 'includes/sidebar.php';
 <div class="flex-1 p-10">
   
     <h2 class="text-2xl font-bold mb-4 text-gray-700">Supplier List</h2>
-  <a href="add_supplier.php" class="bg-blue-700 text-white px-4 py-2 rounded mb-4 inline-block">+ Add Supplier</a>
+
 
   <div class="overflow-x-auto bg-white shadow rounded-lg">
     <table class="min-w-full divide-y divide-gray-200 text-sm">
 
+
+  
+
+
     <div class="overflow-x-auto bg-white shadow rounded-lg">
       <table class="min-w-full divide-y divide-gray-200 text-sm">
-        <thead class="bg-gray-200 w-full text-left text-gray-700 font-medium">
-          <tr>
+            <thead>
+          <tr class="bg-gray-200 w-full text-left text-gray-700 font-medium">
             <th class="px-4 py-3">Supplier ID</th>
             <th class="px-4 py-3">Name</th>
             <th class="px-4 py-3">Contact Numbers</th>
-            <th class = "px-4 py-3">Email</th>
-          
+            <th class="px-4 py-3">Email</th>
+             <th class="px-4 py-3">Actions</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
@@ -42,7 +46,7 @@ include 'includes/sidebar.php';
          <td class="px-4 py-2">
   <a href="edit_supplier.php?id=<?php echo $row['supplier_id']; ?>" class="text-blue-600 hover:underline">Edit</a>
   |
-  <a href="delete_supplier.php?id=<?php echo $row['supplier_id']; ?>" class="text-red-600 hover:underline" onclick="return confirm('Delete this supplier?')">Delete</a>
+
 </td>
 
         </tr>

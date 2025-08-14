@@ -80,8 +80,8 @@ $result = $conn->query("
         <table class="min-w-full text-left text-sm w-full">
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase">
-                    <th class="py-3 px-4">Category Name</th>
-                    <th class="py-3 px-4">Products</th>
+                    <th class="py-3 px-4">Products Counts</th>
+                    <th class="py-3 px-4">Products Category</th>
                     <th class="py-3 px-4">Actions</th>
                 </tr>
             </thead>

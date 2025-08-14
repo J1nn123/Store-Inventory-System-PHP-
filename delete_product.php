@@ -11,6 +11,6 @@ if (isset($_GET['product_id'])) {
 }
 
 // Redirect back to the product list
-header("Location: products.php");
+header("Location: products_dashboard.php");
 exit();
 ?>
